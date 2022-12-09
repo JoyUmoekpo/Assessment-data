@@ -1,4 +1,5 @@
-
+require('dotenv').config();
+const {CONNECTION_URI} = process.env;
 
 module.exports = {
     seed: (req, res) => {
