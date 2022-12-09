@@ -1,5 +1,6 @@
 require('dotenv').config();
 const {CONNECTION_URI} = process.env;
+const Sequelize = require('sequelize');
 
 module.exports = {
     seed: (req, res) => {
