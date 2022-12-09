@@ -23,10 +23,10 @@ module.exports = {
             );
 
             CREATE TABLE cities (
-                city_id serial, primary key, 
+                city_id serial primary key, 
                 name varchar,
                 rating integer,
-                country_id integer NOT NULL REFERENCES country(country_id)
+                country_id INT NOT NULL REFERENCES countries(country_id)
             );
 
             insert into countries (name)
