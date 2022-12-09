@@ -2,6 +2,15 @@ require('dotenv').config();
 const {CONNECTION_URI} = process.env;
 const Sequelize = require('sequelize');
 
+const sequelize = new Sequelize(CONNECTION_URI, {
+    dialect: 'postgres',
+    dialectOptions: {
+        ssl: {
+            rejectUnauthorized: false
+        }
+    }
+});
+
 module.exports = {
     seed: (req, res) => {
         sequelize.query(`
