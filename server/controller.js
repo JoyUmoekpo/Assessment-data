@@ -231,13 +231,30 @@ module.exports = {
         }).catch(err => console.log('error seeding DB', err))
     },
     getCountries: (req, res) => {
-        sequelize.query(`SELECT * FROM countries;`)
+        sequelize.query(`
+        SELECT * FROM countries;
+        `)
+        .then(dbRes => res.status(200).send(dbRes[0]))
+        .catch(err => console.log(err))
+    },
+    createCity: (req, res) => {
+        let {name, rating, countryId: country_id} = req.body;
+
+        sequelize.query(`
+        INSERT INTO cities 
+        (name, rating, country_id)
+        VALUES ('${name}', ${rating}, ${country_id});
+        `)
         .then(dbRes => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
     },
     getCities: (req, res) => {
-        sequelize.query(`SELECT * FROM cities ci
-        JOIN countries co ON ci.country_id = co.country_id;`)
+        sequelize.query(`
+        SELECT ci.city_id, ci.name, ci.rating 
+        FROM cities ci
+        JOIN countries co 
+        ON ci.country_id = co.country_id;
+        `)
         .then(dbRes => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
     }
