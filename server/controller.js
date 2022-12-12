@@ -253,7 +253,8 @@ module.exports = {
         SELECT city_id, city.name AS city, rating, country.name AS country
         FROM cities city
         JOIN countries country 
-        ON city.country_id = country.country_id;
+        ON city.country_id = country.country_id
+        ORDER BY rating DESC;
         `)
         .then(dbRes => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
